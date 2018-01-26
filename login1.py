@@ -1,5 +1,6 @@
 import unittest
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 class LoginTests (unittest.TestCase):
     @classmethod
@@ -32,6 +33,40 @@ class LoginTests (unittest.TestCase):
         employee.click()
 
         assert "Your most important asset" in self.driver.page_source
+        self.driver.back()
+
+    def test_visitor_link(self):
+        visitors = self.driver.find_element_by_id('vis-main-menu')
+        visitors.click()
+
+        assert "Know exactly who's in" in self.driver.page_source
+        self.driver.back()
+
+    def test_evacuation_link(self):
+        self.driver.find_element_by_xpath("//a[@href='/evacuation']").click()
+
+        assert "Know exactly who's in" in self.driver.page_source
+        self.driver.back()
+
+    def test_prereg_link(self):
+        self.driver.find_element_by_xpath("//a[@href='/preRegistration']").click()
+
+        assert "Because First Impressions Last" in self.driver.page_source
+        self.driver.back()
+
+    def test_admin_link(self):
+        self.driver.find_element_by_xpath("//a[@href='/companiesAdmins']").click()
+
+        assert  "Manage the powered ones" in self.driver.page_source
+        self.driver.back()
+
+    #def test_billing_link(self):
+    #    self.driver.find_element_by_partial_link_text('Account').click()
+     #   self.driver.implicitly_wait(30)
+      #  self.driver.find_element_by_xpath("//a[@href='/billing/plans-and-pricing']").click()
+
+       # assert "Fair Pricing, Flexible Plans. Packed with Features" in self.driver.page_source
+
 
     @classmethod
     def tearDownClass(cls):
